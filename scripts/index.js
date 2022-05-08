@@ -15,17 +15,11 @@ function userInfo() {
 
 function popupOpen() {
   userInfo();
-  popup.classList.add('popup_opened');
-}
+  popup.classList.toggle('popup_opened');
+} 
 
 function popupClose() {
-  popup.classList.remove('popup_opened');
-}
-
-function popupOverlayClickHandler(evt) {
-  if (evt.target === evt.currentTarget) {
-    popupClose();
-  }
+  popup.classList.toggle('popup_opened');
 }
 
 function formSubmitHandler (evt) {
