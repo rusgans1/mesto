@@ -77,12 +77,12 @@ function elementAdd (text, src) {
     
   elementPicture.addEventListener('click', function() {
     popupOpen(popupFullSize);
-    const pictureFullsize = popupFullSize.querySelector('.popup__fullsize-image_picture');
+    const pictureFullsize = popupFullSize.querySelector('.fullsize-image__picture');
 
     pictureFullsize.src = src;
     pictureFullsize.alt = text;
     
-    popupFullSize.querySelector('.popup__fullsize-image_caption').textContent = text;
+    popupFullSize.querySelector('.fullsize-image__caption').textContent = text;
   });
   
   const buttonTrash = elementElement.querySelector('.element__button-trash');
