@@ -6,13 +6,15 @@
   <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
+
 <body class="body">
   <div class="page">
     <header class="header">
       <img class="header__logo" src="./images/logo.svg" alt="Логотип">
     </header>
+    
     <main>
-      <section class="profile">
+      <section class="profile" aria-label="Профиль">
         <div class="profile__content">
           <img class="profile__avatar" src="./images/Jacques-Yves-Cousteau.jpg" alt="Жак-Ив Кусто">
           <div class="profile__info">
@@ -25,67 +27,89 @@
         </div>
         <button class="profile__button-add" type="button"></button>
       </section>
-    
-      <section class="elements">
-        <article class="element">
-          <img class="element__pic" src="./images/Elbrus.jpg" alt="Эльбрус">
-          <div class="element__container">
-            <h2 class="element__title">Эльбрус</h2>
-            <button class="element__button-like" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/Sakhalin.jpg" alt="Сахалин">
-          <div class="element__container">
-            <h2 class="element__title">Сахалин</h2>
-            <button class="element__button-like" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/Kabardino-Balkar.jpg" alt="Кабардино-Балкария">
-          <div class="element__container">
-            <h2 class="element__title">Кабардино-Балкария</h2>
-            <button class="element__button-like" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/Karachay-Cherkessia.jpg" alt="Карачаево-Черкесия">
-          <div class="element__container">
-            <h2 class="element__title">Карачаево-Черкесия</h2>
-            <button class="element__button-like" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/Karelia.jpg" alt="Карелия">
-          <div class="element__container">
-            <h2 class="element__title">Карелия</h2>
-            <button class="element__button-like" type="button"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__pic" src="./images/Baikal.jpg" alt="Байкал">
-          <div class="element__container">
-            <h2 class="element__title">Байкал</h2>
-            <button class="element__button-like" type="button"></button>
-          </div>
-        </article>
+
+      <section class="elements" aria-label="Галерея">
       </section>
     </main>
+
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <section class="popup">
-      <div class="popup__container">
-        <button class="popup__button-close" type="button"></button>
-        <h3 class="popup__title">Редактировать профиль</h3>
-        <form name="popup-form" class="popup__form">
-          <input class="popup__input popup__input_name" type="text" name="name" placeholder="Имя" required>
-          <input class="popup__input popup__input_about" type="text" name="about" placeholder="О себе" required>
-          <button class="popup__button-submit" type="submit">Сохранить</button>
-        </form>
-      </div>
-    </section>
+
+    <template id="element">
+      <article class="element">
+        <img src="#" alt="#" class="element__pic">
+        <button class="element__button-trash" type="button"></button>
+        <div class="element__container">
+          <h2 class="element__title"></h2>
+          <button class="element__button-like" type="button"></button>
+        </div>
+      </article>
+    </template>
   </div>
+
+  <section class="popup popup_profile-edit" aria-label="Редактирование профиля">
+    <div class="popup__container">
+      <button class="popup__button-close" type="button"></button>
+      <h3 class="popup__title">Редактировать профиль</h3>
+      <form class="popup__form" name="popup-form">
+        <input
+          class="popup__input popup__input_name"
+          type="text"
+          name="name"
+          placeholder="Имя"
+          minlength="2"
+          maxlength="40"
+          required
+        />
+        <input
+          class="popup__input popup__input_about"
+          type="text"
+          name="about"
+          placeholder="О себе"
+          minlength="2"
+          maxlength="100"
+          required
+        />
+        <button class="popup__button-submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup popup_card-add" aria-label="Добавление карточки">
+    <div class="popup__container">
+      <button class="popup__button-close" type="button"></button>
+      <h3 class="popup__title">Новое место</h3>
+      <form class="popup__form" name="popup-form">
+        <input
+          class="popup__input popup__input_title"
+          type="text"
+          name="title"
+          placeholder="Название"
+          minlength="2"
+          maxlength="40"
+          required
+        />
+        <input
+          class="popup__input popup__input_link"
+          type="url"
+          name="link"
+          placeholder="Ссылка на картинку"
+          required
+        />
+        <button class="popup__button-submit" type="submit">Создать</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup popup_fullsize" aria-label="Открытие полного размера">
+    <figure class="popup__fullsize-image">
+      <img src="#" alt="#" class="popup__fullsize-image_picture">
+      <button class="popup__button-close" type="button"></button>
+      <figcaption><p class="popup__fullsize-image_caption"></p></figcaption>
+    </figure>
+  </section>
+
   <script src="./scripts/index.js"></script>
 </body>
 </html>
