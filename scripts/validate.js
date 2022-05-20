@@ -40,17 +40,21 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-const disablePopupButton = (button) => {
-  button.classList.add('popup__button-submit_invalid');
-  button.disabled = 'disabled';
+const disablePopupButton = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.disabled = true;
+};
+
+const enablePopupButton = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.remove(inactiveButtonClass);
+  buttonElement.disabled = false;
 };
 
 const toggleButtonState = (inputList, buttonElement, obj) => {
   if (hasInvalidInput(inputList)) {
-    disablePopupButton(buttonElement);
+    disablePopupButton(buttonElement, obj.inactiveButtonClass);
   } else {
-    buttonElement.classList.remove(obj.inactiveButtonClass);
-    buttonElement.disabled = '';
+    enablePopupButton(buttonElement, obj.inactiveButtonClass);
   }
 };
 

@@ -76,12 +76,14 @@ popups.forEach((item) => {
   item.querySelector('.popup__button-close').addEventListener('click', () => {
     closePopup(item);
   });
-  item.addEventListener('click', clickOverlay);
+  item.addEventListener('mousedown', clickOverlay);
 });
 
 const getCardElement = (text, src) => {
   const cardElement = elementModel.querySelector('.element').cloneNode(true);
   const elementPicture = cardElement.querySelector('.element__pic');
+  const pictureFullsize = popupFullSize.querySelector('.fullsize-image__picture');
+  const captionFullsize = popupFullSize.querySelector('.fullsize-image__caption');
 
   cardElement.querySelector('.element__title').textContent = text;
 
@@ -89,12 +91,10 @@ const getCardElement = (text, src) => {
   elementPicture.alt = text;
   
   elementPicture.addEventListener('click', () => {
-    const pictureFullsize = popupFullSize.querySelector('.fullsize-image__picture');
-
     pictureFullsize.src = src;
     pictureFullsize.alt = text;
     
-    popupFullSize.querySelector('.fullsize-image__caption').textContent = text;
+    captionFullsize.textContent = text;
     openPopup(popupFullSize);
   });
   return cardElement;
