@@ -8,6 +8,7 @@ const popupFullSize = document.querySelector('.popup_fullsize');
 
 const popupButtonEdit = profile.querySelector('.profile__button-edit');
 const popupButtonAdd = profile.querySelector('.profile__button-add');
+const popupEditProfileButtonSubmit = popupEditProfile.querySelector('.popup__button-submit');
 const popupAddCardButtonSubmit = popupAddCard.querySelector('.popup__button-submit');
 const popupFormEditProfile = popupEditProfile.querySelector('.popup__form');
 const popupFormAddCard = popupAddCard.querySelector('.popup__form');
@@ -79,6 +80,22 @@ popups.forEach((item) => {
   item.addEventListener('mousedown', clickOverlay);
 });
 
+const handleTrashElement = (evt) => {
+  evt.target.closest('.element').remove();
+};
+
+const handleLikeElement = (evt) => {
+  evt.target.classList.toggle('element__button-like_active');
+};
+
+const addButtonsOnCard = (el) => {
+  const elementTrashButton = el.querySelector('.element__button-trash');
+  elementTrashButton.addEventListener('click', handleTrashElement);
+
+  const elementLikeButton = el.querySelector('.element__button-like');
+  elementLikeButton.addEventListener('click', handleLikeElement);
+};
+
 const getCardElement = (text, src) => {
   const cardElement = elementModel.querySelector('.element').cloneNode(true);
   const elementPicture = cardElement.querySelector('.element__pic');
@@ -90,6 +107,8 @@ const getCardElement = (text, src) => {
   elementPicture.src = src;
   elementPicture.alt = text;
   
+  addButtonsOnCard(cardElement);
+
   elementPicture.addEventListener('click', () => {
     pictureFullsize.src = src;
     pictureFullsize.alt = text;
@@ -112,6 +131,8 @@ const openPopupEditProf = () => {
   inputJob.value = userJobText;
 
   openPopup(popupEditProfile);
+
+  disablePopupButton(popupEditProfileButtonSubmit, 'popup__button-submit_invalid');
 };
 
 const handleSubmitEditProfile = (evt) => {
@@ -128,7 +149,7 @@ const openPopupAddCards = () => {
 
   openPopup(popupAddCard);
 
-  disablePopupButton(popupAddCardButtonSubmit);
+  disablePopupButton(popupAddCardButtonSubmit, 'popup__button-submit_invalid');
 };
 
 const handleSubmitAddCard = (evt) => {
@@ -138,15 +159,6 @@ const handleSubmitAddCard = (evt) => {
 
   closePopup(popupAddCard);
 };
-
-elementContainer.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('element__button-like')) {
-    evt.target.classList.toggle('element__button-like_active');
-  }
-  if (evt.target.classList.contains('element__button-trash')) {
-    evt.target.closest('.element').remove();
-  }
-});
 
 popupButtonEdit.addEventListener('click', openPopupEditProf);
 popupFormEditProfile.addEventListener('submit', handleSubmitEditProfile);
