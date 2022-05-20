@@ -1,6 +1,7 @@
 ### `Яндекс.Практикум`
 * [**4 СПРИНТ**](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=28212%3A269)
 * [**5 СПРИНТ**](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=50160%3A2)
+* [**6 СПРИНТ**](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=1124%3A73)
 * [**Mesto**](https://rusgans1.github.io/mesto/)
 
 ## Описание проекта:
@@ -12,6 +13,8 @@
 * продвинутая семантика HTML5,
 * JavaScript,
 * popup,
+* валидацию всех форм,
+* улучшите UX,
 * flexbox,
 * grid,
 * адаптивная верстка через media,
