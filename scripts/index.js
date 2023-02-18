@@ -89,8 +89,6 @@ const openPopupEditProf = () => {
   inputJob.value = userJobText;
 
   openPopup(popupEditProfile);
-
-  disablePopupButton(popupEditProfileButtonSubmit, 'popup__button-submit_invalid');
 };
 
 const handleSubmitEditProfile = (evt) => {
