@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Место</title>
 </head>
 
 <body class="body">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="./images/logo.svg" alt="Логотип">
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип">
     </header>
     
     <main>
       <section class="profile" aria-label="Профиль">
         <div class="profile__content">
-          <img class="profile__avatar" src="./images/Jacques-Yves-Cousteau.jpg" alt="Жак-Ив Кусто">
+          <img class="profile__avatar" src="<%=require('./images/Jacques-Yves-Cousteau.jpg')%>" alt="Жак-Ив Кусто">
           <div class="profile__info">
             <div class="profile__container">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -68,7 +67,7 @@
           class="popup__input popup__input_about"
           type="text"
           id="about"
-          name="about"
+          name="info"
           placeholder="О себе"
           minlength="2"
           maxlength="200"
@@ -89,7 +88,7 @@
           class="popup__input popup__input_title"
           type="text"
           id="title"
-          name="title"
+          name="name"
           placeholder="Название"
           minlength="2"
           maxlength="30"
@@ -117,7 +116,5 @@
       <figcaption><p class="fullsize-image__caption"></p></figcaption>
     </figure>
   </section>
-
-  <script src="./scripts/index.js" type="module"></script>
 </body>
 </html>
