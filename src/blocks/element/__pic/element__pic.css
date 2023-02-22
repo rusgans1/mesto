@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+.element__pic[alt] {
+  color: #fff;
+}
+
 @media screen and (max-width: 940px) {
   .element__pic {
     height: 320px;

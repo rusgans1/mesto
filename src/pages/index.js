@@ -1,4 +1,4 @@
-import "../../pages/index.css";
+import "./index.css";
 
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
@@ -17,26 +17,30 @@ import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { UserInfo } from "../components/UserInfo.js";
 
-function createCard(data) {
-  return new Card(
-    {
-      item: data,
-      handleCardClick: () => {
-        const createPopupImage = new PopupWithImage(".popup_fullsize");
-        createPopupImage.open(data);
-        createPopupImage.setEventListeners();
-      },
-    },
-    "#element"
-  ).generateCard();
+const createPopupImage = new PopupWithImage(".popup_fullsize");
+createPopupImage.setEventListeners(); 
+
+function createCard(data) { 
+  return new Card( 
+    { 
+      item: data, 
+      handleCardClick: () => { 
+        createPopupImage.open(data); 
+      }, 
+    }, 
+    "#element" 
+  ).generateCard(); 
 }
 
 function createFormValidator(form) {
   return new FormValidator(validatorOptions, form);
 }
 
-createFormValidator(popupFormAddCard).enableValidation();
-createFormValidator(popupFormEditProfile).enableValidation();
+const addFormValitation = createFormValidator(popupFormAddCard);
+const editFormValitation = createFormValidator(popupFormEditProfile);
+
+addFormValitation.enableValidation();
+editFormValitation.enableValidation();
 
 const renderContainer = new Section(
   {
@@ -52,8 +56,8 @@ const renderContainer = new Section(
 renderContainer.renderItems();
 
 const userInfo = new UserInfo({
-  userName: ".profile__title",
-  userInfo: ".profile__subtitle",
+  userNameSelector: ".profile__title",
+  userInfoSelector: ".profile__subtitle",
 });
 
 const generateAddPopup = new PopupWithForm(".popup_card-add", {
@@ -73,14 +77,14 @@ const generateEditPopup = new PopupWithForm(".popup_profile-edit", {
 generateEditPopup.setEventListeners();
 
 popupButtonAdd.addEventListener("click", () => {
+  addFormValitation.resetValidation();
   generateAddPopup.open();
 });
 
 popupButtonEdit.addEventListener("click", () => {
+  editFormValitation.resetValidation();
   const userData = userInfo.getUserInfo();
   inputName.value = userData.name;
   inputJob.value = userData.info;
   generateEditPopup.open();
 });
-
-console.log('Hello, World!') 
