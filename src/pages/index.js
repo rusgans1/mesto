@@ -24,8 +24,8 @@ function createCard(data) {
   return new Card( 
     { 
       item: data, 
-      handleCardClick: () => { 
-        createPopupImage.open(data); 
+      handleCardClick: (cardData) => { 
+        createPopupImage.open(cardData); 
       }, 
     }, 
     "#element" 

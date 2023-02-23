@@ -31,7 +31,7 @@ export class Card {
   }
 
   _eventFullsizeScreen() {
-    this._handleCardClick();
+    this._handleCardClick({name: this._title, link: this._imageLink});
   }
 
   _eventLikeButton(evt) {
