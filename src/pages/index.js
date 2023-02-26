@@ -112,8 +112,8 @@ api.getInitialCards().then((data) => {
 });
 
 const userInfo = new UserInfo({
-  userNameSelector: ".profile__title",
-  userInfoSelector: ".profile__subtitle",
+  userName: ".profile__title",
+  userInfo: ".profile__subtitle",
   userAvatar: ".profile__avatar",
 });
 
@@ -149,6 +149,7 @@ const generateEditPopup = new PopupWithForm(".popup_profile-edit", {
     api
       .setUserInfo(inputs)
       .then((item) => {
+        console.log(item);
         userInfo.setUserInfo(item);
       })
       .catch((err) => {
