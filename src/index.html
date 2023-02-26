@@ -16,7 +16,7 @@
       <section class="profile" aria-label="Профиль">
         <div class="profile__content">
           <div class="profile__avatar-block">
-            <img class="profile__avatar" src="" alt="Аватар">
+            <img class="profile__avatar" src="#" alt="Аватар">
             <div class="profile__avatar-overlay">
               <img class="profile__overlay-icon"
                 src="<%=require('./images/edit-button.svg')%>"
@@ -65,12 +65,12 @@
         <input
           class="popup__input popup__input_link"
           type="url"
-          id="link"
+          id="avatar-link"
           name="avatar"
           placeholder="Ссылка на картинку"
           required
         />
-        <span class="popup__error link-error" id="error-link"></span>
+        <span class="popup__error link-error" id="error-avatar-link"></span>
         <button class="popup__button-submit" type="submit">Сохранить</button>
       </form>
     </div>
