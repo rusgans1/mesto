@@ -125,6 +125,7 @@ const generateAddPopup = new PopupWithForm(".popup_card-add", {
       .then((card) => {
         const item = createCard(card);
         renderContainer.addItem(item);
+        generateAddPopup.close();
       })
       .catch(showError)
       .finally(() => {
@@ -143,6 +144,7 @@ const generateEditPopup = new PopupWithForm(".popup_profile-edit", {
       .then((item) => {
         console.log(item);
         userInfo.setUserInfo(item);
+        generateEditPopup.close();
       })
       .catch(showError)
       .finally(() => {
