@@ -13,12 +13,14 @@ import {
   inputName,
   inputJob,
   validatorOptions,
+  selectors,
 } from "../utils/constants.js";
 import Section from "../components/Section.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 import { UserInfo } from "../components/UserInfo.js";
+import { showError } from "../utils/function.js";
 
 const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-60",
@@ -31,9 +33,23 @@ const api = new Api({
 let userId;
 
 const createPopupImage = new PopupWithImage(".popup_fullsize");
-createPopupImage.setEventListeners();
 const createPopupRemove = new PopupWithConfirmation(".popup_confirm-remove");
+const userInfo = new UserInfo({
+  userName: selectors.inputUserNameSelector,
+  userInfo: selectors.inputUserInfoSelector,
+  userAvatar: selectors.inputUserAvatarSelector,
+});
+
+createPopupImage.setEventListeners();
 createPopupRemove.setEventListeners();
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([user, data]) => {
+    userInfo.setUserInfo(user);
+    userId = user._id;
+    return renderContainer.renderItems(data);
+  })
+  .catch(showError);
 
 function createCard(data) { 
   const card = new Card( 
@@ -51,9 +67,7 @@ function createCard(data) {
               card.removeCard();
               createPopupRemove.close();
             })
-            .catch((err) => {
-              console.log(err);
-            });
+            .catch(showError);
         });
       },
       handleActivationLikeClick: () => {
@@ -61,28 +75,24 @@ function createCard(data) {
           .sendLike(data._id)
           .then((info) => {
             card.changeLikeStatus();
-            card.eventCounterLikes(info.likes.length);
+            card.setLikesCounter(info.likes.length);
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch(showError);
       },
       handleDisactivationLikeClick: () => {
         api
           .removeLike(data._id)
           .then((info) => {
             card.changeLikeStatus();
-            card.eventCounterLikes(info.likes.length);
+            card.setLikesCounter(info.likes.length);
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          .catch(showError);
       },
       userInfo: userId,
     }, 
     "#element" 
   );
-  return card;
+  return card.generateCard();
 }
 
 function createFormValidator(form) {
@@ -100,27 +110,12 @@ editFormValitation.enableValidation();
 const renderContainer = new Section(
   {
     renderer: (items) => {
-      const card = createCard(items).generateCard();;
+      const card = createCard(items);
       renderContainer.addItem(card);
     },
   },
   ".elements"
 );
-
-api.getInitialCards().then((data) => {
-  return renderContainer.renderItems(data);
-});
-
-const userInfo = new UserInfo({
-  userName: ".profile__title",
-  userInfo: ".profile__subtitle",
-  userAvatar: ".profile__avatar",
-});
-
-api.getUserInfo().then((info) => {
-  userInfo.setUserInfo(info);
-  userId = info._id;
-});
 
 const generateAddPopup = new PopupWithForm(".popup_card-add", {
   submitForm: (inputs) => {
@@ -128,14 +123,11 @@ const generateAddPopup = new PopupWithForm(".popup_card-add", {
     api
       .setNewCard(inputs)
       .then((card) => {
-        const item = createCard(card).generateCard();
+        const item = createCard(card);
         renderContainer.addItem(item);
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch(showError)
       .finally(() => {
-        generateAddPopup.close();
         generateAddPopup.renderLoading(false, "");
       });
   },
@@ -152,11 +144,8 @@ const generateEditPopup = new PopupWithForm(".popup_profile-edit", {
         console.log(item);
         userInfo.setUserInfo(item);
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch(showError)
       .finally(() => {
-        generateEditPopup.close();
         generateEditPopup.renderLoading(false, "");
       });
   },
@@ -173,11 +162,8 @@ const generateChangePopup = new PopupWithForm(".popup_avatar-change", {
         userInfo.setUserAvatar(item);
         generateChangePopup.close();
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch(showError)
       .finally(() => {
-        generateChangePopup.close();
         generateChangePopup.renderLoading(false, "");
       });
   },

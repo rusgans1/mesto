@@ -17,5 +17,10 @@ export const validatorOptions = {
   submitButtonSelector: '.popup__button-submit',
   inactiveButtonClass: 'popup__button-submit_invalid',
   inputErrorClass: 'popup__input_invalid',
-  errorClass: 'popup__error_active'
+  errorClass: 'popup__error_active',
+};
+export const selectors = {
+  inputUserNameSelector: ".profile__title",
+  inputUserInfoSelector: ".profile__subtitle",
+  inputUserAvatarSelector: ".profile__avatar",
 };

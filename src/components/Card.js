@@ -24,10 +24,9 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector(".element__button-like")
-      .addEventListener("click", (evt) => {
-        this._eventLikeButton();
+    this._buttonLike
+      .addEventListener("click", () => {
+        this._handleLikeButton();
       });
     this._element
       .querySelector(".element__pic")
@@ -50,15 +49,13 @@ export class Card {
   }
 
   changeLikeStatus() {
-    this._element
-      .querySelector(".element__button-like")
+    this._buttonLike
       .classList.toggle("element__button-like_active");
   }
 
-  _eventLikeButton() {
+  _handleLikeButton() {
     if (
-      !this._element
-        .querySelector(".element__button-like")
+      !this._buttonLike
         .classList.contains("element__button-like_active")
     ) {
       this._handleActivationLikeClick();
@@ -67,8 +64,8 @@ export class Card {
     }
   }
 
-  eventCounterLikes(data) {
-    this._element.querySelector(".element__counter-likes").textContent = data;
+  setLikesCounter(data) {
+    this._counterLikes.textContent = data;
   }
 
   removeCard() {
@@ -77,6 +74,8 @@ export class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._buttonLike = this._element.querySelector(".element__button-like");
+    this._counterLikes = this._element.querySelector(".element__counter-likes");
 
     this._setEventListeners();
 
@@ -92,7 +91,7 @@ export class Card {
     ) {
       this.changeLikeStatus();
     }
-    this.eventCounterLikes(this._likes.length);
+    this.setLikesCounter(this._likes.length);
     this._disactivationRemoveButton();
 
     return this._element;
